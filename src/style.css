@@ -1,0 +1,147 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333333;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Set styles for the content section */
+.content {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+}
+
+/* Set styles for the dashboard section */
+#dashboard {
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    margin-right: 20px;
+    padding: 20px;
+    width: 250px;
+}
+
+/* Set styles for the dashboard buttons */
+.myButton1,
+.myButton2,
+.myButton3,
+.myButton4 {
+    background-color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    color: #333333;
+    display: block;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 10px;
+    text-align: left;
+    width: 100%;
+}
+
+/* Set styles for the container section */
+#container {
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #cccccc;
+    flex-grow: 1;
+    padding: 20px;
+}
+
+footer {
+    background-color: #333333;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 10px;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+caption {
+    width: 50px;
+    margin-bottom: 30px;
+}
+
+#ToDoTable {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #f1f1f1;
+
+}
+
+/* Style for the caption */
+#ToDoTable caption {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: left;
+    width: 100px
+}
+
+/* Style for table header */
+#ToDoTable th {
+    background-color: #ddd;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: left;
+    padding: 10px;
+}
+
+/* Style for table rows */
+#ToDoTable tr {
+    border-bottom: 1px solid #ddd;
+}
+
+/* Style for alternate table rows */
+#ToDoTable tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Style for table cells */
+#ToDoTable td {
+    font-size: 1rem;
+    padding: 10px;
+}
+
+#ToDoTable tr:hover {
+    background-color: #ddd;
+}
+
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    background-color: white;
+    width: 400px;
+    height: 300px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* 
+.popup::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+     display: block; 
+} */
