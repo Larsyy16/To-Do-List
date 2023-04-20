@@ -48,7 +48,9 @@ header {
 
 /* Set styles for the container section */
 #container {
-    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    background-color: #F0F0F0;
     border-radius: 5px;
     box-shadow: 0 0 5px #cccccc;
     flex-grow: 1;
@@ -77,7 +79,8 @@ caption {
     max-width: 600px;
     margin: 0 auto;
     background-color: #f1f1f1;
-
+    margin-top: 20px;
+    margin-bottom:30px;
 }
 
 /* Style for the caption */
@@ -91,7 +94,7 @@ caption {
 
 /* Style for table header */
 #ToDoTable th {
-    background-color: #ddd;
+    background-color: #CCCCCC;
     font-size: 1rem;
     font-weight: bold;
     text-align: left;
@@ -112,6 +115,7 @@ caption {
 #ToDoTable td {
     font-size: 1rem;
     padding: 10px;
+    border: 1px solid #CCCCCC;
 }
 
 #ToDoTable tr:hover {
@@ -133,6 +137,25 @@ caption {
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
 }
 
+.popup p {
+    margin: 10px 0;
+    font-size: 18px;
+    margin-bottom: 10px;
+    margin-left:20px;
+    line-height: 1.5;
+    color: #333;  
+}
+
+    
+  .popup input[type="button"] {
+    display: block;
+    margin: 20px auto 0;
+    padding: 10px 20px;
+    /* background-color: #fff; */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
 /* 
 .popup::before {
     content: '';
@@ -145,3 +168,84 @@ caption {
     z-index: -1;
      display: block; 
 } */
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background-color: #fff;
+    color: #000;
+    font-size: 14px;
+    padding: 4px;
+  }
+
+  form {
+    margin-right: 20px;
+
+  }
+  input[type="submit"] {
+    background-color: #777777;
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+  }
+  
+  /* Task input styles */
+  #task {
+    padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  flex-grow: 1;
+  background-color: #F0F0F0;
+  margin-right: 0;
+  margin-bottom: 10px;
+  }
+  
+  label[for="task"] {
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  /* Date input styles */
+  #dateInput {
+    padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  width: 200px;
+  background-color: #F0F0F0;
+  margin-right: 20px;
+  margin-bottom: 10px;
+  }
+  
+  label[for="dateInput"] {
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  label {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    margin-bottom: 10px;
+  }
+  
+  label:last-of-type {
+    margin-right: 0;
+  }
+
+  .cells {
+    width: 150px;
+  }
+
+  .tableButton {
+    background-color: #777777;
+    color: #FFFFFF;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+  }

@@ -1,4 +1,5 @@
 import "./style.css";
+import deleteTask from "./modules/delete";
 
 //form and submit button
 const container = document.querySelector("#container");
@@ -12,17 +13,37 @@ container.appendChild(newTask);
 // task and date label
 
 const task = document.createElement("input");
-const date = document.createElement("input");
+// const date = document.createElement("input");
 task.id = "task";
-date.id = "date";
+// date.id = "date";
 const labelTask = document.createElement("label");
 const labelDate = document.createElement("label");
-labelTask.value = "Task:";
-labelDate.value = "Date:";
+labelTask.textContent = "Task:";
+labelDate.textContent = "Date:";
+
+
+//date calendar
+// const dateButton = document.createElement('button');
+// dateButton.textContent = 'Due Date';
+
+// function openCalendar() {
+    let dateInput = document.createElement("input");
+
+        dateInput.type = "date";
+        dateInput.id = 'dateInput';
+        dateInput.style.display = "block";
+        // let newTaskForm = document.getElementsByName("newTask")[0];
+//   newTask.appendChild(dateInput);
+    //   }
+// 
+
+
+
+
 
 //Logic
 
-newTask.append(labelTask, task, labelDate, date);
+newTask.append(labelTask, task, labelDate, dateInput);
 newTask.appendChild(newTaskName);
 class Task {
   constructor(title, dueDate) {
@@ -42,7 +63,9 @@ let counter = 1;
 newTaskName.addEventListener("click", submitToDo);
 
 function submitToDo(event) {
-  let newToDo = new Task(task.value, date.value);
+    const dateInput = document.getElementById("dateInput");
+
+  let newToDo = new Task(task.value, dateInput.value);
   event.preventDefault();
   console.log(newToDo);
   //table row
@@ -64,7 +87,7 @@ function submitToDo(event) {
   cell2.innerHTML = newToDo.dueDate;
   cell3.appendChild(detail);
   task.value = '';
-  date.value = '';
+//   dateButton.value = '';
   updateTableButtons();
   addTableButtonListeners();
   
@@ -73,6 +96,10 @@ function submitToDo(event) {
 //details pop up
 
 const popup = document.createElement("div");
+const deleteButton = document.createElement('button');
+deleteButton.id = 'deleteButton';
+deleteButton.textContent = 'Delete';
+deleteButton.addEventListener('click',deleteTask);
 popup.classList.add("popup");
 const popupDate = document.createElement("p");
 const popupTask = document.createElement("p");
@@ -82,7 +109,7 @@ close.setAttribute("type", "button");
 close.setAttribute("value", "Close");
 
 content.appendChild(popup);
-popup.append(popupTask, popupDate, close);
+popup.append(popupTask, popupDate, deleteButton, close);
 
 //logic popup
 let tableButtons = [];
@@ -90,17 +117,22 @@ let tableButtons = [];
 function updateTableButtons() {
   tableButtons = document.querySelectorAll(".tableButton");
 }
+let tracker = 1;
 
 function addTableButtonListeners() {
   tableButtons.forEach((button) => {
     button.addEventListener("click", () => {
       // const parentTd = button.parentNode;
-
+        tracker = button.id;
       const adjacentTd1 = button.closest("tr").querySelector(".cells");
-      console.log(adjacentTd1);
+      console.log(tracker);
       const adjacentTd2 = adjacentTd1.nextElementSibling;
       popupTask.textContent = adjacentTd1.textContent;
       popupDate.textContent = adjacentTd2.textContent;
+      popupTask.contentEditable = true;
+      popupDate.contentEditable = true;
+      popupDate.id = 'popupDate';
+      popupTask.id = 'popupTask'
 
       // const td = button.closest('tr').querySelector('.cells')
       // popupTask.textContent = td.textContent;
@@ -114,6 +146,23 @@ updateTableButtons();
 addTableButtonListeners();
 
 close.addEventListener("click", () => {
-  popup.style.display = "none";
+
+ const popupTask = document.getElementById('popupTask')
+//  const popupDate = document.getElementById('popupDate');
+ const tableButtons = document.querySelectorAll('.tableButton')
+
+ tableButtons.forEach((button) => {
+    if (tracker == button.id) {
+        let buttonLocate = button.closest("tr").querySelector(".cells");
+        buttonLocate.textContent = popupTask.textContent;
+        let buttonLocate2 = buttonLocate.nextElementSibling;
+        buttonLocate2.textContent = popupDate.textContent;
+        //  buttonLocate.textContent = popupTask.textContent;
+        // button.nextElementSibling.textContent = popupDate.textContent;
+    }
+ })
+ popup.style.display = "none";
   content.classList.remove("blur");
 });
+
+
