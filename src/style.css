@@ -249,3 +249,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-size: 14px;
     border-radius: 5px;
   }
+
+  #projectButton {
+    cursor:pointer;
+    border-radius: 5px;
+  }
+
+  #projectButton:hover {
+    background-color: #777777;
+    color:white;
+  }
+
+  
