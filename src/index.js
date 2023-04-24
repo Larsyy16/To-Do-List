@@ -3,6 +3,8 @@ import deleteTask from "./modules/delete";
 import clearContainer from "./modules/project";
 import addTaskSetup from "./modules/project";
 import { newTaskButton } from "./modules/project";
+import { loadTasks } from "./modules/project";
+import { popupProject } from "./modules/project";
 //form and submit button
 const container = document.querySelector("#container");
 const newTask = document.createElement("form");
@@ -182,4 +184,6 @@ projectButton.addEventListener('click',clearContainer);
    });
  }
 //  updateTableButtons();
+// loadTasks();
  addTableButtonListeners();
+

@@ -30,6 +30,7 @@ export default function clearContainer() {
 
     addProject.addEventListener("click", () => {
       addTaskSetup();
+
     });
 }
 
@@ -44,6 +45,7 @@ export function addTaskSetup() {
     const content = document.querySelector('.content')
 
     const newTask = document.createElement("form");
+
     
     const newTaskNameProject = document.createElement("input");
     newTaskNameProject.id = 'newTaskNameProject';
@@ -84,68 +86,81 @@ dateInput.style.display = "block";
 
 
 
-    newTaskNameProject.addEventListener("click", newTaskButton);
+    
 
-  
-  
+    newTask.addEventListener("submit", (event) => {
+      event.preventDefault();
+      newTaskButton();
+    });
+    newTaskButton;
+    loadTasks();
 }
 
-export function newTaskButton(event) {
-  const dateInput = document.getElementById("dateInputProject");
+export function newTaskButton() {
+  // Get the task and date input values
+  const taskProject = document.querySelector('#taskProject').value;
+  const dateInput = document.getElementById('dateInputProject').value;
 
-  event.preventDefault();
-  //table row
-  const table = document.getElementById("tableProject");
-  const taskProject = document.querySelector('#taskProject');
-  const row = table.insertRow();
-  const cell1 = row.insertCell();
-  const cell2 = row.insertCell();
-  cell1.classList.add("cells");
-  cell2.classList.add("cells");
-  const detail = document.createElement("button");
-  
-  detail.classList.add("tableButton");
-  const cell3 = row.insertCell();
-  detail.textContent = "Details";
-  cell1.innerHTML = taskProject.value;
-  cell2.innerHTML = dateInput.value;
-  taskProject.textContent = '';
-  dateInput.textContent = '';
-  cell3.appendChild(detail);
-    detail.addEventListener("click", function() {
-    const content = document.querySelector('.content')
-    const popup = document.querySelector('.popup')
-    const popupTask = document.getElementById('popupTask');
-    const popupDate = document.getElementById('popupDate');
 
- // const parentTd = button.parentNode;
-  //  tracker = button.id;
- const adjacentTd1 = detail.closest("tr").querySelector(".cells");
-//  console.log(tracker);
- const adjacentTd2 = adjacentTd1.nextElementSibling;
- popupTask.textContent = adjacentTd1.textContent;
- popupDate.textContent = adjacentTd2.textContent;
- popupTask.contentEditable = true;
- popupDate.contentEditable = true;
- popupDate.id = 'popupDate';
- popupTask.id = 'popupTask'
+  // Clear the task and date input fields
+  document.querySelector('#taskProject').value = '';
+  document.getElementById('dateInputProject').value = '';
 
- // const td = button.closest('tr').querySelector('.cells')
- // popupTask.textContent = td.textContent;
- popup.style.display = "block";
- content.classList.add("blur");});
+  // Save the task to local storage
+  const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+  tasks.push({ task: taskProject, date: dateInput });
+  localStorage.setItem('tasks', JSON.stringify(tasks));
 }
-// const newTaskName = document.getElementById("newTaskName")
-//     addProject.addEventListener("click", addProj);
+
+// When the page is loaded
+export function loadTasks() {
+  // Retrieve tasks from local storage
+  const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+  // Add tasks to the table
+  const table = document.getElementById('tableProject');
+  tasks.forEach((task) => {
+    const row = table.insertRow();
+    const cell1 = row.insertCell();
+    const cell2 = row.insertCell();
+    const detail = document.createElement('button');
+    detail.classList.add('tableButton2');
+    detail.textContent = 'Details';
+    const cell3 = row.insertCell();
+    cell1.innerHTML = task.task;
+    cell2.innerHTML = task.date;
+    cell3.appendChild(detail);
+
+    detail.addEventListener('click', () => {
+      popupProject();
+    });
+  });
+}
+//popup
+export function popupProject() {
+  let projectTableButtons = document.querySelectorAll(".tableButton2");
+
+       projectTableButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const content = document.querySelector('.content')
+          const popup = document.querySelector('.popup')
+          const popupTask = document.getElementById('popupTask');
+          const popupDate = document.getElementById('popupDate');
+
+       // const parentTd = button.parentNode;
+       const adjacentTd1 = button.closest("tr").previousElementSibling;
+       const adjacentTd2 = adjacentTd1.nextElementSibling;
+       popupTask.textContent = adjacentTd1.textContent;
+       popupDate.textContent = adjacentTd2.textContent;
+       popupTask.contentEditable = true;
+       popupDate.contentEditable = true;
+       popupDate.id = 'popupDate';
+       popupTask.id = 'popupTask'
  
-//   create task entry input and button
-  //   const projectTaskButton = document.createElement('button');
-  //   projectTaskButton.addEventListener("click", () => {
-  //       const row = table.insertRow();
-  //       const cell = row.insertCell();
-  //       cell.innerHTML = task.textContent;
-  //       task.textContent = '';
-  //   });
-
-  // event.preventDefault();
-  // table row
+       // const td = button.closest('tr').querySelector('.cells')
+       // popupTask.textContent = td.textContent;
+       popup.style.display = "block";
+       content.classList.add("blur");
+     });
+   });
+ }
